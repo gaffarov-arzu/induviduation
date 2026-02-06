@@ -5,6 +5,11 @@ import { prisma } from '../../../../lib/prisma';
 const MOCK_USER_ID = 'demo-user-id';
 
 export async function GET() {
+  // Database qurulmayanda Prisma istifadə etmə, sadəcə boş cavab qaytar
+  if (!process.env.DATABASE_URL) {
+    return NextResponse.json({ entry: null });
+  }
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 

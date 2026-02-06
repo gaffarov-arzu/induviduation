@@ -12,6 +12,23 @@ export async function POST(req: NextRequest) {
 
   const { mood, energy, lightAspect, shadowAspect, trigger, reflection } = body;
 
+  // Database hələ qurulmayıbsa, Prisma əvəzinə sadə mock cavab qaytar
+  if (!process.env.DATABASE_URL) {
+    const entry = {
+      id: 'mock-id',
+      userId: MOCK_USER_ID,
+      date: today,
+      mood,
+      energy,
+      lightAspect,
+      shadowAspect,
+      trigger,
+      reflection,
+      createdAt: today,
+    };
+    return NextResponse.json({ entry });
+  }
+
   const existing = await prisma.dailyEntry.findFirst({
     where: {
       userId: MOCK_USER_ID,
