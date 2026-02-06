@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { prisma } from '../../../lib/prisma';
 
 // TODO: əsl auth-dan istifadə et. Hələlik stub user-id.
 const MOCK_USER_ID = 'demo-user-id';
