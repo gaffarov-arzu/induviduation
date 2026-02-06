@@ -1,4 +1,4 @@
-import DailyForm from '@/components/daily/DailyForm';
+import DailyForm from '../../../components/daily/DailyForm';
 
 export default function DailyPage() {
   return (
