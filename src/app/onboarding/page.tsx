@@ -43,7 +43,7 @@ export default function OnboardingPage() {
 
       <section className="flex justify-end">
         <Link
-          href="/(dashboard)"
+          href="/dashboard"
           className="rounded-full bg-indigo-500 px-5 py-2 text-xs font-medium text-white shadow shadow-indigo-500/30 hover:bg-indigo-400"
         >
           Başla

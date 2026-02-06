@@ -5,12 +5,11 @@ export default function DashboardPage() {
   return (
     <main className="mx-auto flex max-w-2xl flex-col gap-6 py-8">
       <section>
-        <h1 className="text-2xl font-semibold text-slate-50">
-          Sənin səyahətin
+        <h1 className="text-xl font-semibold text-slate-50">
+          Dashboard köhnə route
         </h1>
-        <p className="mt-1 text-sm text-slate-400">
-          Hər gün bir az daha aydınlanırsan. Gündəlik qeydlərini davam et və
-          personajını formalaşdır.
+        <p className="mt-1 text-xs text-slate-500">
+          Zəhmət olmasa yeni dashboard ünvanından istifadə et:
         </p>
       </section>
 
@@ -18,11 +17,11 @@ export default function DashboardPage() {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
-              Proqres
+              Yeni ünvan
             </p>
-            <p className="mt-1 text-sm text-slate-100">Təxmini 12% tamamlandı</p>
+            <p className="mt-1 text-sm text-slate-100">/dashboard</p>
           </div>
-          <div className="h-14 w-14 rounded-full bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-500" />
+          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-500" />
         </div>
         <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-slate-800">
           <div className="h-full w-1/6 rounded-full bg-indigo-500" />
@@ -33,17 +32,17 @@ export default function DashboardPage() {
         <div className="flex items-center justify-between gap-3">
           <div>
             <h2 className="text-sm font-semibold text-slate-50">
-              Bugünkü addım
+              Dashboard-a keç
             </h2>
             <p className="mt-1 text-xs text-slate-400">
-              Hisslərini, aydın və kölgə tərəflərini 3–5 dəqiqəyə qeyd et.
+              Əsas panel üçün yeni route əlavə olundu.
             </p>
           </div>
           <Link
-            href="/(dashboard)/daily"
+            href="/dashboard"
             className="rounded-full bg-indigo-500 px-4 py-1.5 text-xs font-medium text-white hover:bg-indigo-400"
           >
-            Günlük formu aç
+            Aç
           </Link>
         </div>
       </section>
