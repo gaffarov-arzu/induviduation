@@ -34,7 +34,7 @@ export default function LandingPage() {
             Səyahətə başla
           </Link>
           <Link
-            href="#how-it-works"
+            href="/how-it-works"
             className="rounded-full border border-slate-600 px-5 py-2 text-sm font-medium text-slate-100 hover:border-slate-400"
           >
             Necə işləyir?
@@ -42,10 +42,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section
-        id="how-it-works"
-        className="mt-4 grid w-full gap-4 text-left sm:grid-cols-3"
-      >
+      <section className="mt-4 grid w-full gap-4 text-left sm:grid-cols-3">
         <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-4">
           <h2 className="text-sm font-semibold text-slate-100">
             1. Gündəlik aydınlıq
