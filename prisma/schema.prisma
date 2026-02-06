@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String          @id @default(cuid())
+  email           String          @unique
+  name            String?
+  username        String?         @unique
+  avatarStyle     String?         // "minimal", "cartoon", "abstract"
+  journeyDuration Int             // 30, 60, 90
+  createdAt       DateTime        @default(now())
+  dailyEntries    DailyEntry[]
+  feedbacks       ExternalFeedback[] @relation("FeedbackReceiver")
+  givenFeedbacks  ExternalFeedback[] @relation("FeedbackGiver")
+  traits          UserTrait[]
+  characterState  CharacterState?
+}
+
+model DailyEntry {
+  id            String   @id @default(cuid())
+  userId        String
+  date          DateTime
+  mood          Int?     // 0–10
+  energy        Int?     // 0–10
+  highlight     String?  // günün aydın anı
+  lightAspect   String?  // günün pozitiv tərəfi
+  shadowAspect  String?  // günün kölgə tərəfi
+  trigger       String?  // nə trigger etdi
+  reflection    String?  // sabahkı mesaj
+  createdAt     DateTime @default(now())
+
+  user          User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, date])
+}
+
+model ExternalFeedback {
+  id             String   @id @default(cuid())
+  receiverId     String   // kimə
+  giverId        String?  // daxil olmuş user-dən gəlibsə
+  isAnonymous    Boolean  @default(true)
+  positiveText   String?  // aydın tərəf
+  shadowText     String?  // kölgə tərəf
+  triggerText    String?  // hansı situasiyada
+  adviceText     String?  // məsləhət
+  createdAt      DateTime @default(now())
+
+  receiver       User     @relation("FeedbackReceiver", fields: [receiverId], references: [id])
+  giver          User?    @relation("FeedbackGiver", fields: [giverId], references: [id])
+}
+
+model TraitDefinition {
+  id          String   @id @default(cuid())
+  name        String   @unique // "Empatiya", "Qorxu-əsaslı qərar"
+  type        String   // "LIGHT" | "SHADOW"
+  description String?
+  createdAt   DateTime @default(now())
+  userTraits  UserTrait[]
+}
+
+model UserTrait {
+  id              String          @id @default(cuid())
+  userId          String
+  traitId         String
+  score           Float           // 0–1 və ya 0–100
+  lightWeight     Float?          // öz yazılarından pay
+  shadowWeight    Float?          // feedback-dən pay
+  lastUpdatedAt   DateTime        @default(now())
+
+  user            User            @relation(fields: [userId], references: [id])
+  trait           TraitDefinition @relation(fields: [traitId], references: [id])
+}
+
+model CharacterState {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  progressPercent     Float    @default(0)
+  unlockedLightCount  Int      @default(0)
+  unlockedShadowCount Int      @default(0)
+  avatarData          Json?    // vizual state (rənglər, elementlər)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @default(now())
+
+  user                User     @relation(fields: [userId], references: [id])
+}
+
